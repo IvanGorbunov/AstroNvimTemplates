@@ -1,0 +1,34 @@
+# Neovim cache and temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Plugin manager cache
+lazy-lock.json
+
+# LSP and DAP logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.backup
+
+# Local configuration overrides
+local.lua
+local/
+
+# Mason tool installations (managed by Mason)
+# Note: Mason installs are typically in ~/.local/share/nvim/mason/
+
+# Temporary debugging files
+debug.log
+trace.log
