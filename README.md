@@ -9,6 +9,9 @@
 - [AstroNvim Python Development Environment](#astronvim-python-development-environment)
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Features](#-features)
+  - [🛠️ Installation](#️-installation)
+    - [Backup Current Configuration](#backup-current-configuration)
+    - [Clone Repository](#clone-repository)
   - [📁 Project Structure](#-project-structure)
   - [⚡ Quick Start](#-quick-start)
     - [System Requirements](#system-requirements)
@@ -69,6 +72,35 @@
 - **Virtual Environments**: Automatic detection and switching
 - **Debugging**: DAP for Python debugging
 - **Web Development**: HTML, CSS, JSON LSP servers
+
+## 🛠️ Installation
+
+### Backup Current Configuration
+
+Make a backup of your current nvim and shared folder:
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
+```
+
+### Clone Repository
+
+**Create a new user repository from this template:**
+
+Press the "Use this template" button above to create a new repository to store your user configuration.
+
+You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
+
+**Clone the repository:**
+
+```bash
+git clone https://github.com/IvanGorbunov/AstroNvimTemplates.git ~/.config/nvim
+cd ~/.config/nvim
+git checkout python3
+```
 
 ## 📁 Project Structure
 
