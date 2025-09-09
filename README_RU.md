@@ -147,14 +147,40 @@ nvim
 
 ### Ручная установка инструментов (опционально)
 
-Все инструменты устанавливаются автоматически, но вы можете установить или обновить их вручную:
+## Установка необходимых инструментов через Mason
 
+> **Важно:** `ruff-lsp` устарел. Используем встроенный LSP из `ruff` (`ruff server`).
+> Также выбираем **один** Python-сервер: `pyright` **или** `basedpyright`.
+
+### Минимальная установка (Python-backend)
+```vim
+:MasonUninstall ruff-lsp
+:MasonInstall ruff pyright black isort debugpy stylua tree-sitter-cli
+```
+
+или, если предпочитаешь Based Pyright:
+```vim
+:MasonUninstall ruff-lsp
+:MasonInstall ruff basedpyright black isort debugpy stylua tree-sitter-cli
+```
+
+### +Опционально (если нужны LSP для фронта/шаблонов)
+```vim
+:MasonInstall json-lsp html-lsp css-lsp emmet-ls
+```
+
+### Pip-tools (в активном venv проекта)
+```bash
+pip install -U ruff black isort debugpy
+```
+
+> После установки: `:LspInfo` — должны быть активны `ruff` + (**pyright** *или* **basedpyright**).
+> Форматирование: оставь **black** (или замени на `ruff_format` через none-ls, но не ставь оба одновременно).
+
+**Дополнительные команды Mason:**
 ```vim
 " Открыть менеджер пакетов Mason
 :Mason
-
-" Установить конкретные инструменты
-:MasonInstall pyright ruff black isort debugpy
 
 " Обновить все установленные пакеты
 :MasonUpdate
@@ -212,11 +238,13 @@ pyenv versions
 ## 🛠️ Установленные инструменты
 
 ### LSP серверы (через Mason)
-- **pyright** - основной Python LSP сервер
-- **ruff** - современный линтер и форматтер
+- **pyright** - основной Python LSP сервер (Microsoft)
+- **basedpyright** - форк pyright от сообщества с дополнительными функциями
+- **ruff** - современный Python линтер и форматтер (встроенный LSP)
 - **html-lsp** - HTML поддержка
 - **css-lsp** - CSS поддержка  
 - **json-lsp** - JSON поддержка
+- **emmet-ls** - расширение HTML/CSS аббревиатур
 
 ### Форматтеры и линтеры
 - **black** - Python код форматтер
