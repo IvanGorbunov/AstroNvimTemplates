@@ -17,7 +17,12 @@
     - [System Requirements](#system-requirements)
     - [First Launch](#first-launch)
     - [Manual Tool Installation (Optional)](#manual-tool-installation-optional)
-    - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
+  - [Install required tools via Mason](#install-required-tools-via-mason)
+    - [Minimal (Python-backend)](#minimal-python-backend)
+    - [+Optional (if you need LSP for frontend/templates)](#optional-if-you-need-lsp-for-frontendtemplates)
+    - [Pip-tools (in active venv project)](#pip-tools-in-active-venv-project)
+      - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
+      - [Creating Virtual Environments with pyenv](#creating-virtual-environments-with-pyenv)
   - [🛠️ Installed Tools](#️-installed-tools)
     - [LSP Servers (via Mason)](#lsp-servers-via-mason)
     - [Formatters and Linters](#formatters-and-linters)
@@ -234,6 +239,67 @@ pyenv versions
 ```
 
 **Note:** After installing new Python versions, restart Neovim and use `<leader>cv` to select the desired Python environment.
+
+### Creating Virtual Environments with pyenv
+
+After installing Python versions, create project-specific virtual environments:
+
+```bash
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Create virtual environment with specific Python version
+pyenv virtualenv 3.12.7 myproject-env
+
+# Set local Python version for the project
+pyenv local myproject-env
+
+# Verify the environment is active
+python --version
+which python
+
+# Install project dependencies
+pip install --upgrade pip
+pip install django fastapi uvicorn pytest black isort ruff
+
+# Create requirements.txt
+pip freeze > requirements.txt
+```
+
+**Alternative: using .venv (local project environments):**
+```bash
+# Create local .venv in project directory
+pyenv exec python -m venv .venv
+
+# Activate environment (manual activation)
+source .venv/bin/activate
+
+# Or use pyenv local to auto-activate
+echo ".venv/bin/python" > .python-version
+```
+
+**Pyenv commands for virtual environments:**
+```bash
+# List all environments
+pyenv versions
+
+# Create new environment
+pyenv virtualenv <python-version> <env-name>
+
+# Remove environment
+pyenv uninstall <env-name>
+
+# Set global default
+pyenv global <env-name>
+
+# Set local project environment
+pyenv local <env-name>
+```
+
+**Integration with Neovim:**
+- Neovim automatically detects `.python-version` files
+- Use `<leader>cv` to manually select environments
+- LSP servers will use the selected Python interpreter
 
 ## 🛠️ Installed Tools
 
