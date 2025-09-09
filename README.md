@@ -16,10 +16,12 @@
   - [⚡ Quick Start](#-quick-start)
     - [System Requirements](#system-requirements)
     - [First Launch](#first-launch)
+    - [Manual Tool Installation (Optional)](#manual-tool-installation-optional)
   - [🛠️ Installed Tools](#️-installed-tools)
     - [LSP Servers (via Mason)](#lsp-servers-via-mason)
     - [Formatters and Linters](#formatters-and-linters)
     - [Debuggers](#debuggers)
+    - [Utilities](#utilities)
   - [⌨️ Keybindings](#️-keybindings)
     - [Basic Commands](#basic-commands)
     - [Python Development](#python-development)
@@ -142,6 +144,36 @@ nvim
 # First launch may take time for installation
 ```
 
+### Manual Tool Installation (Optional)
+
+All tools are installed automatically, but you can manually install or update them:
+
+```vim
+" Open Mason package manager
+:Mason
+
+" Install specific tools
+:MasonInstall pyright ruff black isort debugpy
+
+" Update all installed packages
+:MasonUpdate
+
+" Check installation status
+:MasonLog
+```
+
+**System dependencies (install via package manager):**
+```bash
+# Ubuntu/Debian
+sudo apt install python3-pip nodejs npm ripgrep fd-find git
+
+# Arch Linux
+sudo pacman -S python-pip nodejs npm ripgrep fd git
+
+# macOS (Homebrew)
+brew install python nodejs npm ripgrep fd git
+```
+
 ## 🛠️ Installed Tools
 
 ### LSP Servers (via Mason)
@@ -155,9 +187,13 @@ nvim
 - **black** - Python code formatter
 - **isort** - import sorting
 - **ruff** - fast Python linter
+- **stylua** - Lua formatter
 
 ### Debuggers
 - **debugpy** - Python debugger
+
+### Utilities
+- **tree-sitter-cli** - Tree-sitter parser generator
 
 ## ⌨️ Keybindings
 
