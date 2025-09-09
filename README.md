@@ -17,6 +17,7 @@
     - [System Requirements](#system-requirements)
     - [First Launch](#first-launch)
     - [Manual Tool Installation (Optional)](#manual-tool-installation-optional)
+    - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
   - [🛠️ Installed Tools](#️-installed-tools)
     - [LSP Servers (via Mason)](#lsp-servers-via-mason)
     - [Formatters and Linters](#formatters-and-linters)
@@ -173,6 +174,40 @@ sudo pacman -S python-pip nodejs npm ripgrep fd git
 # macOS (Homebrew)
 brew install python nodejs npm ripgrep fd git
 ```
+
+### 🐍 Python Version Management (Optional)
+
+Install Python 3.12 and 3.13 via pyenv without changing system Python:
+
+```bash
+# Install pyenv
+curl https://pyenv.run | bash
+
+# Add to ~/.bashrc or ~/.zshrc
+echo -e '\n# Pyenv' >> ~/.bashrc
+echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+source ~/.bashrc
+
+# Install required dependencies (Ubuntu/Debian)
+sudo apt update
+sudo apt install build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+libffi-dev liblzma-dev
+
+# Install Python versions
+pyenv install 3.12.7
+pyenv install 3.13.0
+pyenv global 3.12.7
+
+# Verify installation
+python --version
+pyenv versions
+```
+
+**Note:** After installing new Python versions, restart Neovim and use `<leader>cv` to select the desired Python environment.
 
 ## 🛠️ Installed Tools
 

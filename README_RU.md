@@ -17,6 +17,7 @@
     - [Системные требования](#системные-требования)
     - [Первый запуск](#первый-запуск)
     - [Ручная установка инструментов (опционально)](#ручная-установка-инструментов-опционально)
+    - [🐍 Управление версиями Python (опционально)](#-управление-версиями-python-опционально)
   - [🛠️ Установленные инструменты](#️-установленные-инструменты)
     - [LSP серверы (через Mason)](#lsp-серверы-через-mason)
     - [Форматтеры и линтеры](#форматтеры-и-линтеры)
@@ -173,6 +174,40 @@ sudo pacman -S python-pip nodejs npm ripgrep fd git
 # macOS (Homebrew)
 brew install python nodejs npm ripgrep fd git
 ```
+
+### 🐍 Управление версиями Python (опционально)
+
+Установка Python 3.12 и 3.13 через pyenv без изменения системного Python:
+
+```bash
+# Установка pyenv
+curl https://pyenv.run | bash
+
+# Добавим в ~/.bashrc или ~/.zshrc
+echo -e '\n# Pyenv' >> ~/.bashrc
+echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+source ~/.bashrc
+
+# Установка необходимых зависимостей (Ubuntu/Debian)
+sudo apt update
+sudo apt install build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+libffi-dev liblzma-dev
+
+# Установка версий Python
+pyenv install 3.12.7
+pyenv install 3.13.0
+pyenv global 3.12.7
+
+# Проверка установки
+python --version
+pyenv versions
+```
+
+**Примечание:** После установки новых версий Python перезапустите Neovim и используйте `<leader>cv` для выбора нужного Python окружения.
 
 ## 🛠️ Установленные инструменты
 
