@@ -21,8 +21,8 @@
     - [Minimal (Python-backend)](#minimal-python-backend)
     - [+Optional (if you need LSP for frontend/templates)](#optional-if-you-need-lsp-for-frontendtemplates)
     - [Pip-tools (in active venv project)](#pip-tools-in-active-venv-project)
-      - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
-      - [Creating Virtual Environments with pyenv](#creating-virtual-environments-with-pyenv)
+    - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
+    - [Creating Virtual Environments with pyenv](#creating-virtual-environments-with-pyenv)
   - [🛠️ Installed Tools](#️-installed-tools)
     - [LSP Servers (via Mason)](#lsp-servers-via-mason)
     - [Formatters and Linters](#formatters-and-linters)
@@ -46,6 +46,10 @@
   - [🔍 Search and Navigation](#-search-and-navigation)
     - [Telescope (File Search)](#telescope-file-search)
     - [Neo-tree (File Manager)](#neo-tree-file-manager)
+  - [🔎 Showing Hidden Files in Neo-tree](#-showing-hidden-files-in-neo-tree)
+    - [Quick Toggle (temporary)](#quick-toggle-temporary)
+    - [Permanent Configuration](#permanent-configuration)
+    - [📌 Neo-tree Hotkeys Reference](#-neo-tree-hotkeys-reference)
   - [🎨 Code Formatting](#-code-formatting)
     - [Automatic Formatting](#automatic-formatting)
     - [Manual Formatting](#manual-formatting)
@@ -463,6 +467,63 @@ async def root():
 - `<leader>e` - toggle file tree
 - `<leader>o` - focus file tree
 - In tree: `a` - create file/folder, `d` - delete, `r` - rename
+
+## 🔎 Showing Hidden Files in Neo-tree
+
+By default, Neo-tree filters hidden files (`dotfiles`, `.venv`, `.gitignore`, etc.).
+
+### Quick Toggle (temporary)
+In the file tree (`:Neotree`), press:
+```
+zh
+```
+This is the standard hotkey — **toggle hidden files**.
+
+### Permanent Configuration
+Create/open file:
+```
+~/.config/nvim/lua/plugins/neo-tree.lua
+```
+
+Add this configuration:
+```lua
+return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,   -- show .files
+          hide_gitignored = false, -- show gitignored files
+        },
+      },
+    },
+  },
+}
+```
+
+After this: restart Neovim → `:Lazy sync` → open tree (`<leader>e`).
+
+### 📌 Neo-tree Hotkeys Reference
+| Key | Action |
+|-----|--------|
+| `<leader>e` | Open/close file tree |
+| `<leader>o` | Focus file tree |
+| `zh` | Toggle hidden files visibility |
+| `zf` | Toggle gitignored files visibility |
+| `a` | Create new file/folder |
+| `d` | Delete file/folder |
+| `r` | Rename file/folder |
+| `c` | Copy file/folder |
+| `m` | Move file/folder |
+| `y` | Copy file path |
+| `Y` | Copy relative path |
+| `s` | Open in split |
+| `v` | Open in vsplit |
+| `t` | Open in new tab |
+| `P` | Preview file |
+| `<` | Navigate up one directory |
+| `.` | Set as root directory |
 
 ## 🎨 Code Formatting
 
