@@ -83,6 +83,42 @@
 
 ## 🛠️ Установка
 
+### Метод 1: Автоматическая установка на сервер (Рекомендуется для серверов)
+
+Для быстрой установки на серверы Ubuntu/Debian используйте наш автоматизированный скрипт:
+
+```bash
+# Загрузка и запуск скрипта установки
+curl -fsSL https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh | sudo bash
+```
+
+**Или сначала загрузите и проверьте:**
+```bash
+# Загрузить скрипт
+wget https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh
+
+# Просмотреть содержимое скрипта
+cat install-nvim-server.sh
+
+# Сделать исполняемым и запустить
+chmod +x install-nvim-server.sh
+sudo ./install-nvim-server.sh
+```
+
+**Что устанавливает скрипт:**
+- Последняя версия Neovim с GitHub releases
+- Python 3 + pip + пакеты для разработки (ruff, black, isort, debugpy)
+- Node.js (последняя LTS) для поддержки плагинов
+- Инструменты разработки (ripgrep, fd-find, git)
+- JetBrainsMono Nerd Font для иконок
+- AstroNvim Python конфигурация
+
+**Поддерживаемые системы:**
+- Ubuntu 20.04+ (Focal, Jammy, Noble)
+- Debian 11+ (Bullseye, Bookworm)
+
+### Метод 2: Ручная установка
+
 ### Резервное копирование текущей конфигурации
 
 Создайте резервную копию вашей текущей конфигурации nvim и общих папок:
@@ -142,12 +178,32 @@ git checkout python3
 - Git
 
 ### Первый запуск
+
+**После автоматической установки:**
+```bash
+# Запустить Neovim (установлен глобально)
+nvim
+
+# Все плагины установятся автоматически
+# При первом запуске может потребоваться время на установку
+```
+
+**После ручной установки:**
 ```bash
 # Запустить Neovim
 nvim
 
 # Все плагины установятся автоматически
 # При первом запуске может потребоваться время на установку
+```
+
+**Проверка после установки:**
+```bash
+# Проверить версию Neovim
+nvim --version
+
+# Проверить состояние установки
+nvim -c ":checkhealth" -c ":qa"
 ```
 
 ### Ручная установка инструментов (опционально)

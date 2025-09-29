@@ -10,6 +10,8 @@
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Features](#-features)
   - [🛠️ Installation](#️-installation)
+    - [Method 1: Automated Server Installation (Recommended for Servers)](#method-1-automated-server-installation-recommended-for-servers)
+    - [Method 2: Manual Installation](#method-2-manual-installation)
     - [Backup Current Configuration](#backup-current-configuration)
     - [Clone Repository](#clone-repository)
   - [📁 Project Structure](#-project-structure)
@@ -87,6 +89,42 @@
 
 ## 🛠️ Installation
 
+### Method 1: Automated Server Installation (Recommended for Servers)
+
+For quick installation on Ubuntu/Debian servers, use our automated script:
+
+```bash
+# Download and run the installation script
+curl -fsSL https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh | sudo bash
+```
+
+**Or download and inspect first:**
+```bash
+# Download the script
+wget https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh
+
+# Inspect the script
+cat install-nvim-server.sh
+
+# Make executable and run
+chmod +x install-nvim-server.sh
+sudo ./install-nvim-server.sh
+```
+
+**What the script installs:**
+- Latest Neovim from GitHub releases
+- Python 3 + pip + development packages (ruff, black, isort, debugpy)
+- Node.js (latest LTS) for plugin support
+- Development tools (ripgrep, fd-find, git)
+- JetBrainsMono Nerd Font for icons
+- AstroNvim Python configuration
+
+**Supported systems:**
+- Ubuntu 20.04+ (Focal, Jammy, Noble)
+- Debian 11+ (Bullseye, Bookworm)
+
+### Method 2: Manual Installation
+
 ### Backup Current Configuration
 
 Make a backup of your current nvim and shared folder:
@@ -146,12 +184,32 @@ git checkout python3
 - Git
 
 ### First Launch
+
+**After automated installation:**
+```bash
+# Start Neovim (installed globally)
+nvim
+
+# All plugins will install automatically
+# First launch may take time for installation
+```
+
+**After manual installation:**
 ```bash
 # Start Neovim
 nvim
 
 # All plugins will install automatically
 # First launch may take time for installation
+```
+
+**Post-installation verification:**
+```bash
+# Check Neovim version
+nvim --version
+
+# Verify installation health
+nvim -c ":checkhealth" -c ":qa"
 ```
 
 ### Manual Tool Installation (Optional)
