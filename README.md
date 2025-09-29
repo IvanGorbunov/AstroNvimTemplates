@@ -1,34 +1,713 @@
-# AstroNvim Template
+# AstroNvim Python Development Environment
 
-**NOTE:** This is for AstroNvim v5+
+> Modern IDE based on AstroNvim for full-featured Python development with Django and FastAPI support
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+**[Russian Version](README_RU.md) | English Version**
+
+## 📋 Table of Contents
+
+- [AstroNvim Python Development Environment](#astronvim-python-development-environment)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🚀 Features](#-features)
+  - [🛠️ Installation](#️-installation)
+    - [Method 1: Automated Server Installation (Recommended for Servers)](#method-1-automated-server-installation-recommended-for-servers)
+    - [Method 2: Manual Installation](#method-2-manual-installation)
+    - [Backup Current Configuration](#backup-current-configuration)
+    - [Clone Repository](#clone-repository)
+  - [📁 Project Structure](#-project-structure)
+  - [⚡ Quick Start](#-quick-start)
+    - [System Requirements](#system-requirements)
+    - [First Launch](#first-launch)
+    - [Manual Tool Installation (Optional)](#manual-tool-installation-optional)
+  - [Install required tools via Mason](#install-required-tools-via-mason)
+    - [Minimal (Python-backend)](#minimal-python-backend)
+    - [+Optional (if you need LSP for frontend/templates)](#optional-if-you-need-lsp-for-frontendtemplates)
+    - [Pip-tools (in active venv project)](#pip-tools-in-active-venv-project)
+    - [🐍 Python Version Management (Optional)](#-python-version-management-optional)
+    - [Creating Virtual Environments with pyenv](#creating-virtual-environments-with-pyenv)
+  - [🛠️ Installed Tools](#️-installed-tools)
+    - [LSP Servers (via Mason)](#lsp-servers-via-mason)
+    - [Formatters and Linters](#formatters-and-linters)
+    - [Debuggers](#debuggers)
+    - [Utilities](#utilities)
+  - [⌨️ Keybindings](#️-keybindings)
+    - [Basic Commands](#basic-commands)
+    - [Python Development](#python-development)
+    - [Django Commands](#django-commands)
+    - [FastAPI Commands](#fastapi-commands)
+    - [LSP Functions](#lsp-functions)
+    - [Git Integration (LazyGit)](#git-integration-lazygit)
+    - [Debugging (DAP)](#debugging-dap)
+    - [Navigation and Editing](#navigation-and-editing)
+  - [🔧 Virtual Environment Setup](#-virtual-environment-setup)
+    - [Supported Paths](#supported-paths)
+    - [Usage](#usage)
+  - [🐍 Python Projects](#-python-projects)
+    - [Django Project](#django-project)
+    - [FastAPI Project](#fastapi-project)
+  - [🔍 Search and Navigation](#-search-and-navigation)
+    - [Telescope (File Search)](#telescope-file-search)
+    - [Neo-tree (File Manager)](#neo-tree-file-manager)
+  - [🔎 Showing Hidden Files in Neo-tree](#-showing-hidden-files-in-neo-tree)
+    - [Quick Toggle (temporary)](#quick-toggle-temporary)
+    - [Permanent Configuration](#permanent-configuration)
+    - [📌 Neo-tree Hotkeys Reference](#-neo-tree-hotkeys-reference)
+  - [🎨 Code Formatting](#-code-formatting)
+    - [Automatic Formatting](#automatic-formatting)
+    - [Manual Formatting](#manual-formatting)
+  - [🐛 Debugging](#-debugging)
+    - [Debugpy Setup](#debugpy-setup)
+    - [Starting Debug Session](#starting-debug-session)
+  - [📦 Plugin Management](#-plugin-management)
+    - [Lazy.nvim Commands](#lazynvim-commands)
+    - [Mason Commands](#mason-commands)
+  - [🔧 Diagnostics and Troubleshooting](#-diagnostics-and-troubleshooting)
+    - [System Health Check](#system-health-check)
+    - [LSP Information](#lsp-information)
+    - [Common Issues](#common-issues)
+  - [🎯 Performance](#-performance)
+    - [Load Times](#load-times)
+    - [Optimization](#optimization)
+  - [🔄 Updates](#-updates)
+    - [AstroNvim Update](#astronvim-update)
+    - [Plugin Updates](#plugin-updates)
+    - [LSP Server Updates](#lsp-server-updates)
+  - [🤝 Support](#-support)
+    - [Documentation](#documentation)
+    - [Community](#community)
+  - [📝 License](#-license)
+
+## 🚀 Features
+
+- **Python LSP**: Pyright + Ruff for code analysis and linting
+- **Formatting**: Black + isort for automatic code formatting
+- **Django Support**: manage.py commands, shell, runserver
+- **FastAPI Support**: Uvicorn server, testing
+- **Virtual Environments**: Automatic detection and switching
+- **Debugging**: DAP for Python debugging
+- **Web Development**: HTML, CSS, JSON LSP servers
 
 ## 🛠️ Installation
 
-#### Make a backup of your current nvim and shared folder
+### Method 1: Automated Server Installation (Recommended for Servers)
 
-```shell
+For quick installation on Ubuntu/Debian servers, use our automated script:
+
+```bash
+# Download and run the installation script
+curl -fsSL https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh | sudo bash
+```
+
+**Or download and inspect first:**
+```bash
+# Download the script
+wget https://raw.githubusercontent.com/IvanGorbunov/AstroNvimTemplates/python3/install-nvim-server.sh
+
+# Inspect the script
+cat install-nvim-server.sh
+
+# Make executable and run
+chmod +x install-nvim-server.sh
+sudo ./install-nvim-server.sh
+```
+
+**What the script installs:**
+- Latest Neovim from GitHub releases
+- Python 3 + pip + development packages (ruff, black, isort, debugpy)
+- Node.js (latest LTS) for plugin support
+- Development tools (ripgrep, fd-find, git)
+- JetBrainsMono Nerd Font for icons
+- AstroNvim Python configuration
+
+**Supported systems:**
+- Ubuntu 20.04+ (Focal, Jammy, Noble)
+- Debian 11+ (Bullseye, Bookworm)
+
+### Method 2: Manual Installation
+
+### Backup Current Configuration
+
+Make a backup of your current nvim and shared folder:
+
+```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
-#### Create a new user repository from this template
+### Clone Repository
+
+**Create a new user repository from this template:**
 
 Press the "Use this template" button above to create a new repository to store your user configuration.
 
 You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
 
-#### Clone the repository
+**Clone the repository:**
 
-```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
+```bash
+git clone https://github.com/IvanGorbunov/AstroNvimTemplates.git ~/.config/nvim
+cd ~/.config/nvim
+git checkout python3
 ```
 
-#### Start Neovim
+## 📁 Project Structure
 
-```shell
+```
+~/.config/nvim/
+├── init.lua                    # AstroNvim entry point
+├── lua/
+│   ├── community.lua           # AstroCommunity packages
+│   ├── lazy_setup.lua         # Lazy.nvim setup
+│   ├── polish.lua             # Final configurations
+│   └── plugins/
+│       ├── astrocore.lua      # Core AstroNvim settings
+│       ├── astrolsp.lua       # LSP configuration
+│       ├── astroui.lua        # UI settings
+│       ├── mason.lua          # Mason tools
+│       ├── none-ls.lua        # Formatting
+│       ├── python-env.lua     # Virtual environments
+│       ├── python-frameworks.lua # Django/FastAPI
+│       ├── treesitter.lua     # Syntax highlighting
+│       └── user-options.lua   # User settings
+└── README.md                  # This file
+```
+
+## ⚡ Quick Start
+
+### System Requirements
+- Neovim >= 0.10 ([Installation Guide](https://github.com/neovim/neovim/blob/master/INSTALL.md))
+- Python 3.10+ (supports 3.12, 3.13)
+- Node.js and npm
+- ripgrep, fd-find
+- Git
+
+### First Launch
+
+**After automated installation:**
+```bash
+# Start Neovim (installed globally)
 nvim
+
+# All plugins will install automatically
+# First launch may take time for installation
 ```
+
+**After manual installation:**
+```bash
+# Start Neovim
+nvim
+
+# All plugins will install automatically
+# First launch may take time for installation
+```
+
+**Post-installation verification:**
+```bash
+# Check Neovim version
+nvim --version
+
+# Verify installation health
+nvim -c ":checkhealth" -c ":qa"
+```
+
+### Manual Tool Installation (Optional)
+
+## Install required tools via Mason
+
+> **Important:** `ruff-lsp` is deprecated. Use built-in LSP from `ruff` (`ruff server`).
+> Also choose **one** Python server: `pyright` **or** `basedpyright`.
+
+### Minimal (Python-backend)
+```vim
+:MasonUninstall ruff-lsp
+:MasonInstall ruff pyright black isort debugpy stylua tree-sitter-cli
+```
+
+or, if you prefer Based Pyright:
+```vim
+:MasonUninstall ruff-lsp
+:MasonInstall ruff basedpyright black isort debugpy stylua tree-sitter-cli
+```
+
+### +Optional (if you need LSP for frontend/templates)
+```vim
+:MasonInstall json-lsp html-lsp css-lsp emmet-ls
+```
+
+### Pip-tools (in active venv project)
+```bash
+pip install -U ruff black isort debugpy
+```
+
+> After installation: `:LspInfo` — should have active `ruff` + (**pyright** *or* **basedpyright**).
+> Formatting: keep **black** (or replace with `ruff_format` via none-ls, but don't use both simultaneously).
+
+**Additional Mason commands:**
+```vim
+" Open Mason package manager
+:Mason
+
+" Update all installed packages
+:MasonUpdate
+
+" Check installation status
+:MasonLog
+```
+
+**System dependencies (install via package manager):**
+```bash
+# Ubuntu/Debian
+sudo apt install python3-pip nodejs npm ripgrep fd-find git
+
+# Arch Linux
+sudo pacman -S python-pip nodejs npm ripgrep fd git
+
+# macOS (Homebrew)
+brew install python nodejs npm ripgrep fd git
+```
+
+### 🐍 Python Version Management (Optional)
+
+Install Python 3.12 and 3.13 via pyenv without changing system Python:
+
+```bash
+# Install pyenv
+curl https://pyenv.run | bash
+
+# Add to ~/.bashrc or ~/.zshrc
+echo -e '\n# Pyenv' >> ~/.bashrc
+echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+source ~/.bashrc
+
+# Install required dependencies (Ubuntu/Debian)
+sudo apt update
+sudo apt install build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+libffi-dev liblzma-dev
+
+# Install Python versions
+pyenv install 3.12.7
+pyenv install 3.13.0
+pyenv global 3.12.7
+
+# Verify installation
+python --version
+pyenv versions
+```
+
+**Note:** After installing new Python versions, restart Neovim and use `<leader>cv` to select the desired Python environment.
+
+### Creating Virtual Environments with pyenv
+
+After installing Python versions, create project-specific virtual environments:
+
+```bash
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Create virtual environment with specific Python version
+pyenv virtualenv 3.12.7 myproject-env
+
+# Set local Python version for the project
+pyenv local myproject-env
+
+# Verify the environment is active
+python --version
+which python
+
+# Install project dependencies
+pip install --upgrade pip
+pip install django fastapi uvicorn pytest black isort ruff
+
+# Create requirements.txt
+pip freeze > requirements.txt
+```
+
+**Alternative: using .venv (local project environments):**
+```bash
+# Create local .venv in project directory
+pyenv exec python -m venv .venv
+
+# Activate environment (manual activation)
+source .venv/bin/activate
+
+# Or use pyenv local to auto-activate
+echo ".venv/bin/python" > .python-version
+```
+
+**Pyenv commands for virtual environments:**
+```bash
+# List all environments
+pyenv versions
+
+# Create new environment
+pyenv virtualenv <python-version> <env-name>
+
+# Remove environment
+pyenv uninstall <env-name>
+
+# Set global default
+pyenv global <env-name>
+
+# Set local project environment
+pyenv local <env-name>
+```
+
+**Integration with Neovim:**
+- Neovim automatically detects `.python-version` files
+- Use `<leader>cv` to manually select environments
+- LSP servers will use the selected Python interpreter
+
+## 🛠️ Installed Tools
+
+### LSP Servers (via Mason)
+- **pyright** - main Python LSP server (Microsoft)
+- **basedpyright** - community fork of pyright with additional features
+- **ruff** - modern Python linter and formatter (built-in LSP)
+- **html-lsp** - HTML support
+- **css-lsp** - CSS support  
+- **json-lsp** - JSON support
+- **emmet-ls** - HTML/CSS abbreviation expansion
+
+### Formatters and Linters
+- **black** - Python code formatter
+- **isort** - import sorting
+- **ruff** - fast Python linter
+- **stylua** - Lua formatter
+
+### Debuggers
+- **debugpy** - Python debugger
+
+### Utilities
+- **tree-sitter-cli** - Tree-sitter parser generator
+
+## ⌨️ Keybindings
+
+### Basic Commands
+| Command | Action |
+|---------|--------|
+| `<leader>` | Space (main key) |
+| `<leader>ff` | Find files (Telescope) |
+| `<leader>fg` | Search content |
+| `<leader>fw` | Search word under cursor |
+| `<leader>e` | File tree (Neo-tree) |
+| `<leader>o` | Toggle file tree |
+
+### Python Development
+| Command | Action |
+|---------|--------|
+| `<leader>py` | Run current Python file |
+| `<leader>cv` | Select virtual environment |
+
+### Django Commands
+| Command | Action |
+|---------|--------|
+| `<leader>dj` | Django manage.py (interactive) |
+| `<leader>ds` | Django shell |
+| `<leader>dr` | Django runserver |
+| `<leader>dm` | Django migrate |
+
+### FastAPI Commands
+| Command | Action |
+|---------|--------|
+| `<leader>rf` | Run FastAPI server (uvicorn) |
+| `<leader>rs` | Run tests (pytest) |
+
+### LSP Functions
+| Command | Action |
+|---------|--------|
+| `gd` | Go to definition |
+| `gr` | Find references |
+| `K` | Show documentation |
+| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code actions |
+| `<leader>f` | Format file |
+
+### Git Integration (LazyGit)
+| Command | Action |
+|---------|--------|
+| `<leader>gg` | Open LazyGit |
+| `<leader>gc` | Git commits |
+| `<leader>gt` | Git status |
+
+### Debugging (DAP)
+| Command | Action |
+|---------|--------|
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dc` | Continue execution |
+| `<leader>ds` | Step over |
+| `<leader>do` | Step out |
+| `<leader>di` | Step into |
+| `<leader>dt` | Terminate debug |
+
+### Navigation and Editing
+| Command | Action |
+|---------|--------|
+| `<C-h/j/k/l>` | Switch between windows |
+| `<leader>w` | Save file |
+| `<leader>q` | Close window |
+| `<leader>c` | Close buffer |
+| `<leader>/` | Toggle comment |
+
+## 🔧 Virtual Environment Setup
+
+### Supported Paths
+- `~/.virtualenvs/` - virtualenvwrapper
+- `~/.pyenv/versions/` - pyenv environments
+- `./.venv/` - local project environments
+
+### Usage
+1. Open Python project
+2. Press `<leader>cv`
+3. Select desired environment from list
+4. LSP will automatically switch to selected Python
+
+## 🐍 Python Projects
+
+### Django Project
+```python
+# Django project structure
+myproject/
+├── manage.py
+├── myproject/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── myapp/
+    ├── __init__.py
+    ├── models.py
+    ├── views.py
+    └── urls.py
+```
+
+**Commands:**
+- `<leader>dr` - start dev server
+- `<leader>ds` - Django shell for testing
+- `<leader>dm` - apply migrations
+
+### FastAPI Project
+```python
+# main.py
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str
+    email: str
+
+@app.get("/")
+async def root():
+    return {"message": "Hello FastAPI!"}
+```
+
+**Commands:**
+- `<leader>rf` - start server with hot reload
+- `<leader>rs` - run tests
+
+## 🔍 Search and Navigation
+
+### Telescope (File Search)
+- `<leader>ff` - find files by name
+- `<leader>fg` - search content (live grep)
+- `<leader>fb` - search open buffers
+- `<leader>fh` - search history
+- `<leader>fm` - search marks
+
+### Neo-tree (File Manager)
+- `<leader>e` - toggle file tree
+- `<leader>o` - focus file tree
+- In tree: `a` - create file/folder, `d` - delete, `r` - rename
+
+## 🔎 Showing Hidden Files in Neo-tree
+
+By default, Neo-tree filters hidden files (`dotfiles`, `.venv`, `.gitignore`, etc.).
+
+### Quick Toggle (temporary)
+In the file tree (`:Neotree`), press:
+```
+zh
+```
+This is the standard hotkey — **toggle hidden files**.
+
+### Permanent Configuration
+Create/open file:
+```
+~/.config/nvim/lua/plugins/neo-tree.lua
+```
+
+Add this configuration:
+```lua
+return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,   -- show .files
+          hide_gitignored = false, -- show gitignored files
+        },
+      },
+    },
+  },
+}
+```
+
+After this: restart Neovim → `:Lazy sync` → open tree (`<leader>e`).
+
+### 📌 Neo-tree Hotkeys Reference
+| Key | Action |
+|-----|--------|
+| `<leader>e` | Open/close file tree |
+| `<leader>o` | Focus file tree |
+| `zh` | Toggle hidden files visibility |
+| `zf` | Toggle gitignored files visibility |
+| `a` | Create new file/folder |
+| `d` | Delete file/folder |
+| `r` | Rename file/folder |
+| `c` | Copy file/folder |
+| `m` | Move file/folder |
+| `y` | Copy file path |
+| `Y` | Copy relative path |
+| `s` | Open in split |
+| `v` | Open in vsplit |
+| `t` | Open in new tab |
+| `P` | Preview file |
+| `<` | Navigate up one directory |
+| `.` | Set as root directory |
+
+## 🎨 Code Formatting
+
+### Automatic Formatting
+- Format on save enabled by default
+- Black for Python code
+- isort for import sorting
+- Ruff for style fixes
+
+### Manual Formatting
+- `<leader>f` - format current file
+- `:Format` - formatting command
+
+## 🐛 Debugging
+
+### Debugpy Setup
+```python
+# Add breakpoint in code
+import debugpy
+debugpy.breakpoint()
+
+# Or use built-in Neovim breakpoints
+```
+
+### Starting Debug Session
+1. Set breakpoint: `<leader>db`
+2. Start debugging: `<leader>dc`
+3. Use navigation commands for step-by-step execution
+
+## 📦 Plugin Management
+
+### Lazy.nvim Commands
+```vim
+:Lazy                 " Open plugin manager
+:Lazy sync            " Sync plugins
+:Lazy update          " Update plugins  
+:Lazy clean           " Remove unused plugins
+:Lazy profile         " Profile loading
+```
+
+### Mason Commands
+```vim
+:Mason                " Open Mason
+:MasonInstall <name>  " Install package
+:MasonUpdate          " Update all packages
+:MasonLog             " View logs
+```
+
+## 🔧 Diagnostics and Troubleshooting
+
+### System Health Check
+```vim
+:checkhealth          " General check
+:checkhealth lsp      " LSP check
+:checkhealth python   " Python check
+:checkhealth mason    " Mason check
+```
+
+### LSP Information
+```vim
+:LspInfo              " LSP server info
+:LspRestart           " Restart LSP
+:LspLog               " LSP logs
+```
+
+### Common Issues
+
+**LSP not working:**
+1. Check `:LspInfo`
+2. Ensure server installed in `:Mason`
+3. Restart LSP: `:LspRestart`
+
+**Formatting not working:**
+1. Check formatter installation: `:Mason`
+2. Check configuration: `:checkhealth null-ls`
+
+**Virtual environment not detected:**
+1. Use `<leader>cv` for manual selection
+2. Ensure environment contains Python executable
+
+## 🎯 Performance
+
+### Load Times
+- Cold start: ~1-2 seconds
+- Hot start: ~0.5 seconds
+- Lazy loading for most plugins
+
+### Optimization
+- Plugins load on demand
+- LSP servers start only for relevant files
+- Treesitter parsers install automatically
+
+## 🔄 Updates
+
+### AstroNvim Update
+```bash
+# In AstroNvim configuration
+:AstroUpdate
+```
+
+### Plugin Updates
+```vim
+:Lazy sync
+```
+
+### LSP Server Updates
+```vim
+:Mason
+# Select package and press 'U' to update
+```
+
+## 🤝 Support
+
+### Documentation
+- [AstroNvim Docs](https://docs.astronvim.com/)
+- [AstroCommunity](https://github.com/AstroNvim/astrocommunity)
+- [Neovim Docs](https://neovim.io/doc/)
+
+### Community
+- [AstroNvim Discord](https://discord.gg/UcZutyeaFW)
+- [GitHub Issues](https://github.com/AstroNvim/AstroNvim/issues)
+
+## 📝 License
+
+This configuration is based on AstroNvim Template and distributed under the same license.
+
+---
+
+**Version:** AstroNvim v5+ | **Python:** 3.10+ | **Last Updated:** 2025-01-08
